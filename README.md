@@ -1,3 +1,3 @@
 # Chordly
 
-A Chord Sheet Creator
+A Web-based Chord Sheet Creator
