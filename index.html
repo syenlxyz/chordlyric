@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>
+Chordly
+</title>
 <style>
 .col-container {
   display: table;
@@ -9,27 +12,34 @@
 }
 .col {
   display: table-cell;
-  height: 90vh;
+  height: 80vh;
   width: 50%;
   border: solid 1px #000000;
   padding: 10px;
 }
-}
 </style>
 </head>
-
 <body>
+<h1>Chordly</h1>
+<input type="file" id="file">
+
 <div class="col-container">
-  <div class="col" id="input" contenteditable="true"></div>
-  <div class="col" id="output"></div>
+  <div class="col" id="left" contenteditable="true"></div>
+  <div class="col" id="right"></div>
 </div>
-
-<button onclick="print()">Print Output</button>
-
 <script>
-function print() {
-	document.getElementById("output").innerHTML = document.getElementById("input").innerHTML;
-}
+  document.addEventListener("keypress", function(){
+    document.getElementById("right").innerHTML = document.getElementById("left").innerHTML
+  })
+
+  document.getElementById("file").addEventListener("change", function(){
+    var reader = new FileReader();
+    reader.onload = function(){
+      document.getElementById("left").innerHTML = reader.result.split("\n").join("<br>");
+      document.getElementById("right").innerHTML = document.getElementById("left").innerHTML;
+    }
+    reader.readAsText(this.files[0]);s
+  })
 </script>
 </body>
 </html>
