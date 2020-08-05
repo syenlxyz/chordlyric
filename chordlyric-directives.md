@@ -50,6 +50,7 @@ filelist
 output
 
 ## Coming Soon
+new-song
 tranpose
 lyrics-only
 decapo
