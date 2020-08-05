@@ -51,7 +51,7 @@ html, body {
 </div>
 <div class="footer">
   <div class="container">
-    <button onclick="downloadInput()">Download Input</button>
+    <button onclick="downloadInput('input.txt')">Download Input</button>
   </div>
   <div class="container">
     <button onclick="printOutput()">Print Output</button>
@@ -59,23 +59,36 @@ html, body {
 </div>
 <script>
   document.addEventListener("keyup", function(){
-    document.getElementById("right").innerHTML = document.getElementById("left").innerHTML
+    document.getElementById("right").innerHTML = document.getElementById("left").innerHTML;
   })
   document.getElementById("file").addEventListener("change", function(){
     var reader = new FileReader();
     reader.onload = function(){
-      document.getElementById("left").innerHTML = reader.result.split("\n").join("<br>");
+      reader.result.split("\n").map(function(line){
+            var element = document.createElement("div");
+            element.innerHTML = (line.trim() == "") ? "<br>" : line.trim();
+            document.getElementById("left").appendChild(element);
+            });
       document.getElementById("right").innerHTML = document.getElementById("left").innerHTML;
     }
     reader.readAsText(this.files[0]);
   })
-  function downloadInput(){
-    alert("Opps, I farted XD");
-  }
+  function downloadInput(filename){
+        var text = document.getElementById("left").innerText.split("\n\n").join("\n");
+        var element = document.createElement("a");
+        element.setAttribute("href", "data:text/plain;charset=utf-8," + encodeURIComponent(text));
+        element.setAttribute('download', filename);
+        element.click();
+    }  
   function printOutput(){
     var content = document.getElementById("right").innerHTML;
     var output = window.open();
-    output.document.write(['<html>', '<body>', content, '</body>', '</html>'].join("<br>"));
+    output.document.writeln("<!DOCTYPE html>");
+    output.document.writeln("<html>");
+    output.document.writeln("<body>");
+    output.document.writeln(content);
+    output.document.writeln("</body>");
+    output.document.writeln("</html>");
     output.document.close();
     output.print();
     output.close();
@@ -83,3 +96,4 @@ html, body {
 </script>
 </body>
 </html>
+
