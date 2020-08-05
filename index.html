@@ -13,7 +13,7 @@ html, body {
 .header {
   flex: 0 1 auto;
   margin: 0;
-  padding: 1%;
+  padding: 0.5%;
   padding-top: 0;
   padding-bottom: 0;
 }
@@ -26,8 +26,17 @@ html, body {
   margin: 0.5%;
   padding: 0.5%;
   width: 45%;
-  border: solid 1px;
   overflow-wrap: break-word;
+}
+.footer {
+  flex: 0 1 auto;
+  display: flex;
+}
+.footer > div {
+  flex: 1 0 auto;
+  margin: 0;
+  padding: 0.5%;
+  padding-top: 0;
 }
 </style>
 </head>
@@ -37,14 +46,21 @@ html, body {
   <input type="file" id="file">
 </div>
 <div class="main">
-  <div class="container" id="left" contenteditable="true"></div>
-  <div class="container" id="right"></div>
+  <div class="container" id="left" style="border: solid 1px;" contenteditable="true"></div>
+  <div class="container" id="right" style="border: solid 1px;" ></div>
+</div>
+<div class="footer">
+  <div class="container">
+    <button onclick="downloadInput()">Download Input</button>
+  </div>
+  <div class="container">
+    <button onclick="printOutput()">Print Output</button>
+  </div>
 </div>
 <script>
   document.addEventListener("keyup", function(){
     document.getElementById("right").innerHTML = document.getElementById("left").innerHTML
   })
-
   document.getElementById("file").addEventListener("change", function(){
     var reader = new FileReader();
     reader.onload = function(){
@@ -53,6 +69,17 @@ html, body {
     }
     reader.readAsText(this.files[0]);
   })
+  function downloadInput(){
+    alert("Opps, I farted XD");
+  }
+  function printOutput(){
+    var content = document.getElementById("right").innerHTML;
+    var output = window.open();
+    output.document.write(['<html>', '<body>', content, '</body>', '</html>'].join("<br>"));
+    output.document.close();
+    output.print();
+    output.close();
+  }
 </script>
 </body>
 </html>
