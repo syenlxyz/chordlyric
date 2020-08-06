@@ -98,7 +98,7 @@ html, body {
     output.document.writeln("</html>");
     output.document.close();
     output.print();
-    setTimeout(output.close, 0);
+    output.onafterprint = output.close();
   }
 </script>
 </body>
