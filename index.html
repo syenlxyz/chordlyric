@@ -98,7 +98,7 @@ html, body {
     output.document.writeln("</html>");
     output.document.close();
     output.print();
-    output.window.onafterprint = output.window.close();
+    output.onafterprint = output.close();
   }
 </script>
 </body>
