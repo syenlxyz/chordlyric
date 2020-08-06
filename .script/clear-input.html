@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ChordLyric Editor</title>
+<style>
+html, body {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.header {
+  flex: 0 1 auto;
+  margin: 0;
+  padding: 0.5%;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.main {
+  flex: 1 1 auto;
+  display: flex;
+}
+.main > div {
+  flex: 1 0 auto;
+  overflow-wrap: break-word;
+  width: 45%;
+  margin: 0.5%;
+  padding: 0.5%;
+}
+.footer {
+  flex: 0 1 auto;
+  display: flex;
+}
+.footer > div {
+  flex: 1 0 auto;
+  width: 45%;
+  margin: 0;
+  padding: 0.5%;
+  padding-top: 0;
+}
+</style>
+</head>
+<body>
+<div class="header">
+  <h2>Clear Input</h2>
+  <input type="file" id="file">
+</div>
+<div class="main">
+  <div id="left" style="border: solid 1px;" contenteditable="true"></div>
+</div>
+<div class="footer">
+  <div>
+    <button onclick="clearInput()">Clear</button>
+  </div>
+</div>
+<script>
+  document.getElementById("file").addEventListener("change", function(){
+    var reader = new FileReader();
+    reader.onload = function(){
+      reader.result.split("\n").map(function(line){
+            var element = document.createElement("div");
+            element.innerHTML = (line.trim() == "") ? "<br>" : line.trim();
+            document.getElementById("left").appendChild(element);
+            });
+    }
+    reader.readAsText(this.files[0]);
+  })
+  function clearInput(){
+    document.getElementById("file").value = "";
+    document.getElementById("left").innerHTML = "";
+    document.getElementById("right").innerHTML = document.getElementById("left").innerHTML;
+  }
+</script>
+</body>
+</html>
+
