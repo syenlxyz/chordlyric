@@ -15,6 +15,7 @@ capo
 section
 comment
 line-break
+page-break
 
 ## Formatting
 encoding
@@ -29,7 +30,7 @@ subtitle-size
 comment-style
 
 ## Layout
-papersize
+paper-size
 orientation
 margin-top
 margin-bottom
@@ -46,11 +47,11 @@ version
 help
 manual
 verbose
-filelist
+file-list
 output
 
 ## Coming Soon
-new-song
+start...end
 tranpose
-lyrics-only
+lyric-only
 decapo
