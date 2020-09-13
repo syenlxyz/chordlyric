@@ -1,0 +1,142 @@
+/* Dimension*/
+html, body {
+  height: 100%;
+  width: 100%;
+}
+#main-input, #main-output {
+  width: 50%;
+}
+#input-key > .box {
+  width: 5vw;
+}
+.chord {
+  height: 20px;
+}
+/* Flex*/
+html, body, div {
+  display: flex;
+}
+body, #main-input, #main-output {
+  flex-flow: column;
+}
+body, #header-left, #header-right {
+  flex-flow: column;
+}
+#input-content, #output-content {
+  flex-flow: column;
+}
+#main, #main-input, #main-output {
+  flex: 1 1 auto;
+}
+#input-artist, #header-left {
+  flex: 1 1 auto;
+}
+#input-content, #output-content {
+  flex: 1 1 auto;
+}
+/* Spacing*/
+html, body {
+  margin: 0%;
+  padding: 0%;
+}
+#main-input, #main-output {
+  margin: 1%;
+  margin-bottom: 0%;
+}
+#main-input {
+  margin-right: 0.5%;
+}
+#main-output {
+  margin-left: 0.5%;
+}
+#input-title, #input-subtitle {
+  margin-bottom: 0.5%;
+}
+#input-subtitle, #input-content {
+  margin-top: 0.5%;
+}
+#input-artist {
+  margin-right: 0.5%;
+}
+#input-key { 
+  margin-left: 0.5%;
+  padding: 0%;
+}
+#input-title, #input-artist, #input-content, #input-key > div {
+  padding: 1%;
+} 
+#output-title, #output-artist, #output-content, #header-right {
+  padding: 1%;
+}
+#footer, #output-footer {
+  padding: 0.5%;
+}
+/* Alignment */
+#footer, #output-footer {
+  display: block;
+  text-align: center;
+}
+#input-key > div {
+  align-items: center;
+}
+.chord {
+  text-align: center;
+}
+/* Border */
+.box {
+  border: 2px solid darkgray;
+}
+.chord > td {
+  border: 2px solid white;
+}
+/* Color */
+body {
+  background-color: lightgray;
+}
+.box {
+  background-color: white;
+}
+.section::selection, br::selection, td::selection {
+  background: none;
+  color: none;
+}
+.selected {
+  background-color: dodgerblue;
+  color: white;
+}
+.chord {
+  color: blue;
+}
+.opacity {
+  color: rgba(0, 0, 0, 0.6);
+}
+/* Font */
+.title {
+  font-size: 22px;
+  font-weight: bolder;
+}
+.artist, .key {
+  font-size: 20px;
+  font-weight: bold;
+}
+.section {
+  font-size: 18px;
+  font-weight: bold;
+}
+body {
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.copyright {
+  font-size: 12px;
+}
+.chord {
+  font-weight: bold;
+}
+/* Miscellaneous */
+.lyric > td {
+  cursor: default;
+}
+#example {
+  display: none;
+}
