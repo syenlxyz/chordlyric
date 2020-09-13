@@ -1,105 +1,84 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>ChordLyric Editor</title>
-<style>
-html, body {
-  display: flex;
-  flex-flow: column;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-.header {
-  flex: 0 1 auto;
-  margin: 0;
-  padding: 0.5%;
-  padding-top: 0;
-  padding-bottom: 0;
-}
-.main {
-  flex: 1 1 auto;
-  display: flex;
-}
-.main > div {
-  flex: 1 0 auto;
-  overflow-wrap: break-word;
-  width: 45%;
-  margin: 0.5%;
-  padding: 0.5%;
-}
-.footer {
-  flex: 0 1 auto;
-  display: flex;
-}
-.footer > div {
-  flex: 1 0 auto;
-  width: 45%;
-  margin: 0;
-  padding: 0.5%;
-  padding-top: 0;
-}
-</style>
+  <title>ChordLyric Editor</title>
+  <meta charset="UTF-8">
+  <script src="script.js"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="header">
-  <h1>ChordLyric Editor</h1>
-  <input type="file" id="file">
-</div>
-<div class="main">
-  <div id="left" style="border: solid 1px;" contenteditable="true"></div>
-  <div id="right" style="border: solid 1px;"></div>
-</div>
-<div class="footer">
-  <div>
-    <button onclick="downloadInput('input.txt')">Download</button>
-    <button onclick="clearInput()">Clear</button>
+<div id="header"></div>
+<div id="main">
+  <div id="main-input">
+    <div id="input-title" class="title box" contenteditable="true"></div>
+    <div id="input-subtitle">
+      <div id="input-artist" class="artist box" contenteditable="true"></div>
+      <div id="input-key" class="key">
+        <div>Key:&nbsp;</div>
+        <div class="box" contenteditable="true"></div>
+      </div>
+    </div>
+    <div id="input-content" class="box" contenteditable="true"></div>
   </div>
-  <div>
-    <button onclick="printOutput()">Print Output</button>
+  <div id="main-output" class="box">
+    <div id="output-header">
+      <div id="header-left">
+        <div id="output-title" class="title"></div>
+        <div id="output-artist" class="artist"></div>
+      </div>
+      <div id="header-right">
+        <div id="output-key" class="key"></div>
+      </div>
+    </div>
+    <div id="output-content"></div>
+    <div id="output-footer" class="copyright"></div>
   </div>
 </div>
+<div id="footer" class="copyright">Copyright © 2020 ChordLyric by SyenLxyz. All Rights Reserved.</div>
+<div id="example"><div>[Verse 1]</div><div>有时享平安如</div><div>江河水平又稳</div><div>有时遇忧伤来似浪滚</div><div><br></div><div>不论何种环境</div><div>主已教导我说</div><div>我心灵得安宁 得安宁</div><div><br></div><div>[Chorus]</div><div>当寒冬的风暴起</div><div>当世上的思虑袭</div><div>我心灵得安宁 得安宁</div><div><br></div><div>在正午焦阳下</div><div>主的恩典够我用</div><div>我心灵得安宁 得安宁</div><div><br></div><div>[Verse 2]</div><div>当撒旦试探我</div><div>众试炼也来临</div><div>靠这有福确据来得胜</div><div><br></div><div>因主知我的软弱</div><div>祂知我的惧怕</div><div>甘为我流宝血救赎我</div></div>
 <script>
-  document.addEventListener("keyup", function(){
-    document.getElementById("right").innerHTML = document.getElementById("left").innerHTML;
-  })
-  document.getElementById("file").addEventListener("change", function(){
-    var reader = new FileReader();
-    reader.onload = function(){
-      reader.result.split("\n").map(function(line){
-            var element = document.createElement("div");
-            element.innerHTML = (line.trim() == "") ? "<br>" : line.trim();
-            document.getElementById("left").appendChild(element);
-            });
-      document.getElementById("right").innerHTML = document.getElementById("left").innerHTML;
-    }
-    reader.readAsText(this.files[0]);
-  })
-  function downloadInput(filename){
-        var text = document.getElementById("left").innerText.split("\n\n").join("\n");
-        var element = document.createElement("a");
-        element.setAttribute("href", "data:text/plain;charset=utf-8," + encodeURIComponent(text));
-        element.setAttribute('download', filename);
-        element.click();
-    }  
-  function clearInput(){
-    document.getElementById("file").value = "";
-    document.getElementById("left").innerHTML = "";
-    document.getElementById("right").innerHTML = document.getElementById("left").innerHTML;
-  }
-  function printOutput(){
-    var content = document.getElementById("right").innerHTML;
-    var output = window.open();
-    output.document.writeln("<!DOCTYPE html>");
-    output.document.writeln("<html>");
-    output.document.writeln("<body>");
-    output.document.writeln(content);
-    output.document.writeln("</body>");
-    output.document.writeln("</html>");
-    output.document.close();
-    output.print();
-  }
+  // Global variables as item selection placeholders
+  var selected, rowIndex, colIndex;
+  
+  // Load event handler
+  document.getElementById("input-title").addEventListener("keyup", titleSync);
+  document.getElementById("input-artist").addEventListener("keyup", artistSync);
+  document.getElementById("input-key").addEventListener("keyup", keySync);
+  document.getElementById("input-content").addEventListener("keyup", getOutput);
+  document.addEventListener("click", mouseclickSelection);
+  document.addEventListener("keydown", keypressSelection);
+  document.addEventListener("keydown", keypressInput);
+  document.addEventListener("keydown", keypressMovement);
+
+  var TITLE_DEFAULT = "Song Title";
+  var ARTIST_DEFAULT = "Artist";
+  var CONTENT_DEFAULT = document.getElementById("example").innerHTML;
+
+  document.getElementById("input-title").innerHTML = TITLE_DEFAULT;
+  document.getElementById("input-title").classList.add("opacity");
+  document.getElementById("input-artist").innerHTML = ARTIST_DEFAULT;
+  document.getElementById("input-artist").classList.add("opacity");
+  document.getElementById("input-content").innerHTML = CONTENT_DEFAULT;
+  document.getElementById("input-content").classList.add("opacity");
+
+  document.getElementById("input-title").addEventListener("click", function(event) {
+    if (document.getElementById("input-title").innerHTML == TITLE_DEFAULT) {
+      document.getElementById("input-title").innerHTML = "";
+      document.getElementById("input-title").classList.remove("opacity");
+    } 
+  });
+  document.getElementById("input-artist").addEventListener("click", function(event) {
+    if (document.getElementById("input-artist").innerHTML == ARTIST_DEFAULT) {
+      document.getElementById("input-artist").innerHTML = "";
+      document.getElementById("input-artist").classList.remove("opacity");
+    } 
+  });
+  document.getElementById("input-content").addEventListener("click", function(event) {
+    if (document.getElementById("input-content").innerHTML == CONTENT_DEFAULT) {
+      document.getElementById("input-content").innerHTML = "";
+      document.getElementById("input-content").classList.remove("opacity");
+    } 
+  });
 </script>
 </body>
 </html>
-
