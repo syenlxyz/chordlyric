@@ -1,3 +1,62 @@
+// Setup input fields default values and behavior
+function preloadInput(){
+  // Set up default values
+  var example = {};
+  example["input-title"] = "Song Title";
+  example["input-artist"] = "Artist";
+  example["input-content"] = document.getElementById("example").innerHTML;
+  // Set up input interaction for every default value
+  for (item in example) {
+    inputInteraction(item, example[item]);
+  }
+}
+
+// Set up input interaction behavior
+function inputInteraction(id, value){
+  document.getElementById(id).innerHTML = value; // Preload the empty field with default value
+  document.getElementById(id).classList.add("translucent"); // Make the default value translucent
+  // Add an event listener when the element comes into focus
+  document.getElementById(id).addEventListener("focus", function(event) {
+    // If the field contains default values
+    if (document.getElementById(id).innerHTML == value) {
+      document.getElementById(id).innerHTML = ""; // Clear up everything in the field
+      document.getElementById(id).classList.remove("translucent"); // Makes font completely visible
+    }
+  });
+  // Add an event listener when the element comes out of focus
+  document.getElementById(id).addEventListener("focusout", function(event) {
+    // If the field is empty
+    if (document.getElementById(id).innerHTML == "") {
+      document.getElementById(id).innerHTML = value; // Replace the empty string with default value
+      document.getElementById(id).classList.add("translucent"); // Make the default value translucent
+    }
+  });
+}
+
+// Setup data processing from input to output
+function setupOutput() {
+  // Copy song title from input to output on keyup
+  document.getElementById("input-title").addEventListener("keyup", function (event) {
+    document.getElementById("output-title").innerHTML = document.getElementById("input-title").innerHTML;
+  });
+  // Copy artist name from input to output on keyup
+  document.getElementById("input-artist").addEventListener("keyup", function (event) {
+    document.getElementById("output-artist").innerHTML = document.getElementById("input-artist").innerHTML;
+  });
+  // Copy key info from input to output on keyup
+  document.getElementById("input-key").addEventListener("keyup", function (event) {
+    // Display nothing if there is no key input
+    if (document.getElementById("input-key").innerHTML == "") {
+      document.getElementById("output-key").innerHTML = "";
+    // Otherwise display the key information to the output
+    } else { 
+      document.getElementById("output-key").innerHTML = "Key: " + document.getElementById("input-key").innerHTML;
+    }
+  });
+  // Convert raw text data into chordlyric format and display to output on keyup
+  document.getElementById("input-content").addEventListener("keyup", getOutput);
+}
+
 // Disable keypress text edit feature of the main output window
 function disableOutputEdit() {
   document.getElementById("main-output").onkeydown = () => false; // Turn off keydown feature
@@ -11,7 +70,7 @@ function enableMouseHover() {
   for (element of document.getElementsByClassName("box")) {
     // Highlight the elements when the mouse cursor hovers over
     element.addEventListener("mouseover", function(event) {
-      this.classList.add("hover");
+      this.classList.add("hover"); // Add hover to the class list
     });
     // Undo highlight wwhen the mouse cursor moves away
     element.addEventListener("mouseout", function(event) {
@@ -97,8 +156,8 @@ function getContent(object) {
   return table; 
 }
 
- // Set up output edit mode
- function outputMode(){
+ // Turn on chord lyric mode
+ function enableChordLyric(){
   // Turn on output edit feature when output in focus
   document.getElementById("main-output").addEventListener("focus", function(event) {
     document.addEventListener("click", mouseclickSelection);
@@ -108,8 +167,8 @@ function getContent(object) {
   });
 }
 
-// Set up input edit mode
-function inputMode(){
+ // Turn off chord lyric mode
+function disableChordLyric(){
   // Turn off output edit feature when output is out of focus (which means input)
   document.getElementById("main-output").addEventListener("focusout", function(event) {
     document.removeEventListener("click", mouseclickSelection);
@@ -218,7 +277,7 @@ function keypressMovement(event) {
 function selectAll() {
   for (var parent of document.getElementsByClassName("chord")){ // Loop through every chord class row
     for (var child of parent.children){ // Loop through every column in the row
-      child.classList.add("selected"); // Remove selected from the class list
+      child.classList.add("selected"); // Add selected to the class list
     }
   }
 }
