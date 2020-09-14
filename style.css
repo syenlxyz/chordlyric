@@ -6,7 +6,7 @@ html, body {
 #main-input, #main-output {
   width: 50%;
 }
-#input-key > .box {
+#key-right {
   width: 5vw;
 }
 .chord {
@@ -28,7 +28,7 @@ body, #header-left, #header-right {
 #main, #main-input, #main-output {
   flex: 1 1 auto;
 }
-#input-artist, #header-left {
+#input-artist, #input-key, #header-left {
   flex: 1 1 auto;
 }
 #input-content, #output-content {
@@ -58,11 +58,11 @@ html, body {
 #input-artist {
   margin-right: 0.5%;
 }
-#input-key { 
+#input-right { 
   margin-left: 0.5%;
   padding: 0%;
 }
-#input-title, #input-artist, #input-content, #input-key > div {
+#input-title, #input-artist, #input-content, #key-left, #key-right {
   padding: 1%;
 } 
 #output-title, #output-artist, #output-content, #header-right {
@@ -76,7 +76,7 @@ html, body {
   display: block;
   text-align: center;
 }
-#input-key > div {
+#input-right > div {
   align-items: center;
 }
 .chord {
@@ -86,8 +86,14 @@ html, body {
 .box {
   border: 2px solid darkgray;
 }
-.chord > td {
-  border: 2px solid white;
+.box:focus {
+  border: 2px solid dodgerblue;
+}
+[contenteditable]:focus {
+  outline: 0px solid transparent;
+}
+.hover {
+  border: 2px solid dodgerblue;
 }
 /* Color */
 body {
@@ -107,8 +113,8 @@ body {
 .chord {
   color: blue;
 }
-.opacity {
-  color: rgba(0, 0, 0, 0.6);
+.translucent {
+  color: rgba(0, 0, 0, 0.5);
 }
 /* Font */
 .title {
@@ -134,7 +140,13 @@ body {
   font-weight: bold;
 }
 /* Miscellaneous */
-.lyric > td {
+#main-output {
+  caret-color: transparent;
+}
+.box:focus {
+  caret-color: black;
+}
+#main-output > div {
   cursor: default;
 }
 #example {
