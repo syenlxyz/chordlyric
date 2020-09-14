@@ -13,14 +13,17 @@
     <div id="input-title" class="title box" contenteditable="true"></div>
     <div id="input-subtitle">
       <div id="input-artist" class="artist box" contenteditable="true"></div>
-      <div id="input-key" class="key">
-        <div>Key:&nbsp;</div>
-        <div class="box" contenteditable="true"></div>
+      <div id="input-right">
+        <div id="key-left" class="key">Key:&nbsp;</div>
+        <div id="key-right" class="key box">
+          <div>&nbsp;</div>
+          <div id="input-key" contenteditable="true"></div>
+        </div>
       </div>
     </div>
     <div id="input-content" class="box" contenteditable="true"></div>
   </div>
-  <div id="main-output" class="box">
+  <div id="main-output" class="box" contenteditable="true">
     <div id="output-header">
       <div id="header-left">
         <div id="output-title" class="title"></div>
@@ -34,51 +37,121 @@
     <div id="output-footer" class="copyright"></div>
   </div>
 </div>
-<div id="footer" class="copyright">Copyright © 2020 ChordLyric by SyenLxyz. All Rights Reserved.</div>
+<div id="footer" class="copyright">ChordLyric Editor
+  Copyright © 2020 by SyenLxyz. All Rights Reserved.</div>
 <div id="example"><div>[Verse 1]</div><div>有时享平安如</div><div>江河水平又稳</div><div>有时遇忧伤来似浪滚</div><div><br></div><div>不论何种环境</div><div>主已教导我说</div><div>我心灵得安宁 得安宁</div><div><br></div><div>[Chorus]</div><div>当寒冬的风暴起</div><div>当世上的思虑袭</div><div>我心灵得安宁 得安宁</div><div><br></div><div>在正午焦阳下</div><div>主的恩典够我用</div><div>我心灵得安宁 得安宁</div><div><br></div><div>[Verse 2]</div><div>当撒旦试探我</div><div>众试炼也来临</div><div>靠这有福确据来得胜</div><div><br></div><div>因主知我的软弱</div><div>祂知我的惧怕</div><div>甘为我流宝血救赎我</div></div>
 <script>
   // Global variables as item selection placeholders
   var selected, rowIndex, colIndex;
-  
-  // Load event handler
-  document.getElementById("input-title").addEventListener("keyup", titleSync);
-  document.getElementById("input-artist").addEventListener("keyup", artistSync);
-  document.getElementById("input-key").addEventListener("keyup", keySync);
-  document.getElementById("input-content").addEventListener("keyup", getOutput);
-  document.addEventListener("click", mouseclickSelection);
-  document.addEventListener("keydown", keypressSelection);
-  document.addEventListener("keydown", keypressInput);
-  document.addEventListener("keydown", keypressMovement);
 
+  // Load settings
+  disableOutputEdit();
+  enableMouseHover();
+  outputMode();
+  inputMode();
+
+
+
+
+
+
+
+  var DEFAULT = {
+    "TITLE": "Song Title",
+    "ARTIST": "Artist",
+    "CONTENT": document.getElementById("example").innerHTML
+  }
+
+  // Set default values
   var TITLE_DEFAULT = "Song Title";
   var ARTIST_DEFAULT = "Artist";
   var CONTENT_DEFAULT = document.getElementById("example").innerHTML;
 
   document.getElementById("input-title").innerHTML = TITLE_DEFAULT;
-  document.getElementById("input-title").classList.add("opacity");
+  document.getElementById("input-title").classList.add("translucent");
   document.getElementById("input-artist").innerHTML = ARTIST_DEFAULT;
-  document.getElementById("input-artist").classList.add("opacity");
+  document.getElementById("input-artist").classList.add("translucent");
   document.getElementById("input-content").innerHTML = CONTENT_DEFAULT;
-  document.getElementById("input-content").classList.add("opacity");
+  document.getElementById("input-content").classList.add("translucent");
 
-  document.getElementById("input-title").addEventListener("click", function(event) {
+  document.getElementById("input-title").addEventListener("focus", function(event) {
     if (document.getElementById("input-title").innerHTML == TITLE_DEFAULT) {
       document.getElementById("input-title").innerHTML = "";
-      document.getElementById("input-title").classList.remove("opacity");
-    } 
+      document.getElementById("input-title").classList.remove("translucent");
+    }
   });
-  document.getElementById("input-artist").addEventListener("click", function(event) {
+  document.getElementById("input-artist").addEventListener("focus", function(event) {
     if (document.getElementById("input-artist").innerHTML == ARTIST_DEFAULT) {
       document.getElementById("input-artist").innerHTML = "";
-      document.getElementById("input-artist").classList.remove("opacity");
-    } 
+      document.getElementById("input-artist").classList.remove("translucent");
+    }
   });
-  document.getElementById("input-content").addEventListener("click", function(event) {
+  document.getElementById("input-content").addEventListener("focus", function(event) {
     if (document.getElementById("input-content").innerHTML == CONTENT_DEFAULT) {
       document.getElementById("input-content").innerHTML = "";
-      document.getElementById("input-content").classList.remove("opacity");
-    } 
+      document.getElementById("input-content").classList.remove("translucent");
+    }
   });
+
+  document.getElementById("input-title").addEventListener("focusout", function(event) {
+    if (document.getElementById("input-title").innerHTML == "") {
+      document.getElementById("input-title").innerHTML = TITLE_DEFAULT;
+      document.getElementById("input-title").classList.add("translucent");
+      
+    }
+  });
+  document.getElementById("input-artist").addEventListener("focusout", function(event) {
+    if (document.getElementById("input-artist").innerHTML == "") {
+      document.getElementById("input-artist").innerHTML = ARTIST_DEFAULT;
+      document.getElementById("input-artist").classList.add("translucent");
+    }
+  });
+  document.getElementById("input-content").addEventListener("focusout", function(event) {
+    if (document.getElementById("input-content").innerHTML == "") {
+      document.getElementById("input-content").innerHTML = CONTENT_DEFAULT;
+      document.getElementById("input-content").classList.add("translucent");
+    }
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  // Copy song title from input to output immediately
+  function titleSync(event) {
+    document.getElementById("output-title").innerHTML = document.getElementById("input-title").innerHTML;
+  }
+
+  // Copy artist name from input to output immediately
+  function artistSync(event) {
+    document.getElementById("output-artist").innerHTML = document.getElementById("input-artist").innerHTML;
+  }
+
+  // Copy key info from input to output immediately
+  function keySync(event) {
+    // Display nothing if there is no key input
+    if (document.getElementById("input-key").innerHTML == "") {
+      document.getElementById("output-key").innerHTML = "";
+    // Otherwise display the key information to the output
+    } else { 
+      document.getElementById("output-key").innerHTML = "Key: " + document.getElementById("input-key").innerHTML;
+    }
+  }
+
+  // Load data
+  document.getElementById("input-title").addEventListener("keyup", titleSync);
+  document.getElementById("input-artist").addEventListener("keyup", artistSync);
+  document.getElementById("input-key").addEventListener("keyup", keySync);
+  document.getElementById("input-content").addEventListener("keyup", getOutput);
+
 </script>
 </body>
 </html>
