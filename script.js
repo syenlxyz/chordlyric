@@ -4,6 +4,7 @@ function preloadInput(){
   var example = {};
   example["input-title"] = "Song Title";
   example["input-artist"] = "Artist";
+  example["input-key"] = "Key";
   example["input-content"] = document.getElementById("example").innerHTML;
   // Set up input interaction for every default value
   for (item in example) {
