@@ -1,21 +1,22 @@
-// Copy song title from input to output immediately
-function titleSync(event) {
-  document.getElementById("output-title").innerHTML = document.getElementById("input-title").innerHTML;
+// Disable keypress text edit feature of the main output window
+function disableOutputEdit() {
+  document.getElementById("main-output").onkeydown = () => false; // Turn off keydown feature
+  document.getElementById("main-output").onkeypress = () => false; // Turn off keydown feature
+  document.getElementById("main-output").onkeyup = () => false; // Turn off keydown feature
 }
 
-// Copy artist name from input to output immediately
-function artistSync(event) {
-  document.getElementById("output-artist").innerHTML = document.getElementById("input-artist").innerHTML;
-}
-
-// Copy key info from input to output immediately
-function keySync(event) {
-  // Display nothing if there is no key input
-  if (document.getElementById("input-key").children[1].innerHTML == "") {
-    document.getElementById("output-key").innerHTML = "";
-  // Otherwise display the key information to the output
-  } else { 
-    document.getElementById("output-key").innerHTML = "Key: " + document.getElementById("input-key").children[1].innerHTML;
+// Highlight border when moouseover and undo when mouseout
+function enableMouseHover() {
+  // Only applied to the elements with box class
+  for (element of document.getElementsByClassName("box")) {
+    // Highlight the elements when the mouse cursor hovers over
+    element.addEventListener("mouseover", function(event) {
+      this.classList.add("hover");
+    });
+    // Undo highlight wwhen the mouse cursor moves away
+    element.addEventListener("mouseout", function(event) {
+      this.classList.remove("hover");
+    });
   }
 }
 
@@ -23,7 +24,6 @@ function keySync(event) {
 function getOutput(){
   // Load data from input content
   var input = getInput();
-  console.log(input);
   // Create a placeholder for chordlyric display
   var display = document.createElement("div");
   // Map the following function to every object in the input
@@ -97,22 +97,26 @@ function getContent(object) {
   return table; 
 }
 
-// Select everything
-function selectAll() {
-  for (var parent of document.getElementsByClassName("chord")){ // Loop through every chord class row
-    for (var child of parent.children){ // Loop through every column in the row
-      child.classList.add("selected"); // Remove selected from the class list
-    }
-  }
+ // Set up output edit mode
+ function outputMode(){
+  // Turn on output edit feature when output in focus
+  document.getElementById("main-output").addEventListener("focus", function(event) {
+    document.addEventListener("click", mouseclickSelection);
+    document.addEventListener("keydown", keypressSelection);
+    document.addEventListener("keydown", keypressInput);
+    document.addEventListener("keydown", keypressMovement);
+  });
 }
 
-// Deselect everything
-function deselectAll() {
-  for (var parent of document.getElementsByClassName("chord")){ // Loop through every chord class row
-    for (var child of parent.children){ // Loop through every column in the row
-      child.classList.remove("selected"); // Remove selected from the class list
-    }
-  }
+// Set up input edit mode
+function inputMode(){
+  // Turn off output edit feature when output is out of focus (which means input)
+  document.getElementById("main-output").addEventListener("focusout", function(event) {
+    document.removeEventListener("click", mouseclickSelection);
+    document.removeEventListener("keydown", keypressSelection);
+    document.removeEventListener("keydown", keypressInput);
+    document.removeEventListener("keydown", keypressMovement);
+  });
 }
 
 // Determine mouse click selection behavior
@@ -208,4 +212,22 @@ function keypressMovement(event) {
     deselectAll(); // Deselect everything
     selected.classList.add("selected"); // Highlight the new selected element
   } 
+}
+
+// Select everything
+function selectAll() {
+  for (var parent of document.getElementsByClassName("chord")){ // Loop through every chord class row
+    for (var child of parent.children){ // Loop through every column in the row
+      child.classList.add("selected"); // Remove selected from the class list
+    }
+  }
+}
+
+// Deselect everything
+function deselectAll() {
+  for (var parent of document.getElementsByClassName("chord")){ // Loop through every chord class row
+    for (var child of parent.children){ // Loop through every column in the row
+      child.classList.remove("selected"); // Remove selected from the class list
+    }
+  }
 }
