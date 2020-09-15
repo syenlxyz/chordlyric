@@ -4,34 +4,69 @@ function preloadInput(){
   var example = {};
   example["input-title"] = "Song Title";
   example["input-artist"] = "Artist";
-  example["input-key"] = "Key";
   example["input-content"] = document.getElementById("example").innerHTML;
   // Set up input interaction for every default value
-  for (item in example) {
-    inputInteraction(item, example[item]);
-  }
+  Object.keys(example).map(function(id) {
+    var value = example[id];
+    document.getElementById(id).innerHTML = value; // Preload the empty field with default value
+    document.getElementById(id).classList.add("translucent"); // Make the default value translucent
+    // Add an event listener when the element comes into focus
+    document.getElementById(id).addEventListener("focus", function(event) {
+      // If the field contains default values
+      if (document.getElementById(id).innerHTML == value) {
+        document.getElementById(id).innerHTML = ""; // Clear up everything in the field
+        document.getElementById(id).classList.remove("translucent"); // Makes font completely visible
+        this.click(); // Simulate a mouse click on the current element
+      }
+    });
+    // Add an event listener when the element comes out of focus
+    document.getElementById(id).addEventListener("focusout", function(event) {
+      // If the field is empty
+      if (document.getElementById(id).innerHTML == "") {
+        document.getElementById(id).innerHTML = value; // Replace the empty string with default value
+        document.getElementById(id).classList.add("translucent"); // Make the default value translucent
+      }
+    });
+  });
 }
 
-// Set up input interaction behavior
-function inputInteraction(id, value){
-  document.getElementById(id).innerHTML = value; // Preload the empty field with default value
-  document.getElementById(id).classList.add("translucent"); // Make the default value translucent
-  // Add an event listener when the element comes into focus
-  document.getElementById(id).addEventListener("focus", function(event) {
-    // If the field contains default values
-    if (document.getElementById(id).innerHTML == value) {
-      document.getElementById(id).innerHTML = ""; // Clear up everything in the field
-      document.getElementById(id).classList.remove("translucent"); // Makes font completely visible
+// Enable dropdown menu function
+function enableDropdown() {
+  // Add an event listener and perform the following function on click
+  document.getElementById("key-button").addEventListener("click", function(event) {
+    // Toggle the dropdown window on or off everytime the button is clicked
+    document.getElementById("key-options").classList.toggle("show");
+  });
+  // Close the dropdown menu when clicked elsewhere
+  document.addEventListener("click", function (event) {
+    // Check if the clicked element has a dropdown class
+    if (!event.target.matches(".dropdown")) { // If does not have dropdown class
+      if (document.getElementById("key-options").classList.contains("show")) {
+        // Hide the dropdown menu if it's shown
+        document.getElementById("key-options").classList.remove("show"); 
+      }
     }
   });
-  // Add an event listener when the element comes out of focus
-  document.getElementById(id).addEventListener("focusout", function(event) {
-    // If the field is empty
-    if (document.getElementById(id).innerHTML == "") {
-      document.getElementById(id).innerHTML = value; // Replace the empty string with default value
-      document.getElementById(id).classList.add("translucent"); // Make the default value translucent
-    }
+  // Update input key value when an option is clicked
+  Array.from(document.getElementById("key-options").children).map(function (element) {
+    element.addEventListener("click", function (event) {
+      // If item clicked option is a non breaking space
+      if (event.target.innerHTML == "nbsp;") {
+        document.getElementById("input-key").innerHTML = ""; // Set the input key to empty value
+      } else { // Otherwise just copy and paste the clicked value
+        document.getElementById("input-key").innerHTML = event.target.innerHTML; 
+      }
+      // Hide the dropdown menu when an item was clicked
+      document.getElementById("key-options").classList.toggle("show");
+    });
   });
+}
+
+// Disable keypress text edit feature of the main output window
+function disableOutputEdit() {
+  document.getElementById("main-output").onkeydown = () => false; // Turn off keydown feature
+  document.getElementById("main-output").onkeypress = () => false; // Turn off keydown feature
+  document.getElementById("main-output").onkeyup = () => false; // Turn off keydown feature
 }
 
 // Setup data processing from input to output
@@ -44,25 +79,21 @@ function setupOutput() {
   document.getElementById("input-artist").addEventListener("keyup", function (event) {
     document.getElementById("output-artist").innerHTML = document.getElementById("input-artist").innerHTML;
   });
-  // Copy key info from input to output on keyup
-  document.getElementById("input-key").addEventListener("keyup", function (event) {
-    // Display nothing if there is no key input
-    if (document.getElementById("input-key").innerHTML == "") {
-      document.getElementById("output-key").innerHTML = "";
-    // Otherwise display the key information to the output
-    } else { 
-      document.getElementById("output-key").innerHTML = "Key: " + document.getElementById("input-key").innerHTML;
-    }
+  // Copy key value from input to output upon dropdown item select
+  Array.from(document.getElementById("key-options").children).map(function (element) {
+    element.addEventListener("click", // Send the value of input key to the output
+    function getKey() {
+      // Display nothing if there is no key input
+      if (document.getElementById("input-key").innerText == "&nbsp;") {
+        document.getElementById("output-key").innerHTML = "";
+      // Otherwise display the key information to the output
+      } else { 
+        document.getElementById("output-key").innerHTML = "Key: " + document.getElementById("input-key").innerHTML;
+      }
+    });
   });
   // Convert raw text data into chordlyric format and display to output on keyup
   document.getElementById("input-content").addEventListener("keyup", getOutput);
-}
-
-// Disable keypress text edit feature of the main output window
-function disableOutputEdit() {
-  document.getElementById("main-output").onkeydown = () => false; // Turn off keydown feature
-  document.getElementById("main-output").onkeypress = () => false; // Turn off keydown feature
-  document.getElementById("main-output").onkeyup = () => false; // Turn off keydown feature
 }
 
 // Load data into chordlyric editor
