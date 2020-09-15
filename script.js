@@ -54,7 +54,7 @@ function enableDropdown() {
       if (event.target.innerHTML == "&nbsp;") {
         document.getElementById("input-key").innerHTML = ""; // Set the input key to empty value
       } else { // Otherwise just copy and paste the clicked value
-        document.getElementById("input-key").innerHTML = event.target.innerHTML; 
+        document.getElementById("input-key").innerHTML = event.target.innerText; 
       }
       // Hide the dropdown menu when an item was clicked
       document.getElementById("key-options").classList.toggle("show");
@@ -88,7 +88,7 @@ function setupOutput() {
         document.getElementById("output-key").innerHTML = "";
       // Otherwise display the key information to the output
       } else { 
-        document.getElementById("output-key").innerHTML = "Key: " + document.getElementById("input-key").innerHTML;
+        document.getElementById("output-key").innerHTML = "Key: " + document.getElementById("input-key").innerText;
       }
     });
   });
@@ -173,8 +173,8 @@ function getContent(object) {
   return table; 
 }
 
- // Turn on chord lyric mode
- function enableChordLyric(){
+// Turn on chord lyric mode
+function enableChordLyric(){
   // Turn on output edit feature when output in focus
   document.getElementById("main-output").addEventListener("focus", function(event) {
     document.addEventListener("click", mouseclickSelection);
@@ -184,7 +184,7 @@ function getContent(object) {
   });
 }
 
- // Turn off chord lyric mode
+// Turn off chord lyric mode
 function disableChordLyric(){
   // Turn off output edit feature when output is out of focus (which means input)
   document.getElementById("main-output").addEventListener("focusout", function(event) {
