@@ -1,17 +1,21 @@
 /* Dimension*/
 html, body {
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
+}
+#input-content, #output-content {
+  height: 50vh;
 }
 #main-input, #main-output {
-  width: 50%;
+  width: 40vw;
 }
 #key-right {
+  width: 10vw;
+}
+#input-key {
   width: 5vw;
 }
-.chord {
-  height: 20px;
-}
+
 /* Flex*/
 html, body, div {
   display: flex;
@@ -25,6 +29,9 @@ body, #header-left, #header-right {
 #input-content, #output-content {
   flex-flow: column;
 }
+#input-content > div {
+  flex-flow: column;
+}
 #main, #main-input, #main-output {
   flex: 1 1 auto;
 }
@@ -34,9 +41,14 @@ body, #header-left, #header-right {
 #input-content, #output-content {
   flex: 1 1 auto;
 }
+
 /* Spacing*/
 html, body {
   margin: 0%;
+  padding: 0%;
+}
+#input-right { 
+  margin-left: 0.5%;
   padding: 0%;
 }
 #main-input, #main-output {
@@ -58,10 +70,6 @@ html, body {
 #input-artist {
   margin-right: 0.5%;
 }
-#input-right { 
-  margin-left: 0.5%;
-  padding: 0%;
-}
 #input-title, #input-artist, #input-content, #key-left, #key-right {
   padding: 1%;
 } 
@@ -71,29 +79,28 @@ html, body {
 #footer, #output-footer {
   padding: 0.5%;
 }
+
 /* Alignment */
 #footer, #output-footer {
+  text-align: center;
   display: block;
+}
+.chord {
   text-align: center;
 }
 #input-right > div {
   align-items: center;
 }
-.chord {
-  text-align: center;
-}
+
 /* Border */
 .box {
   border: 2px solid darkgray;
 }
-.box:focus {
+.box:focus, .box:hover {
   border: 2px solid dodgerblue;
 }
 [contenteditable]:focus {
   outline: 0px solid transparent;
-}
-.hover {
-  border: 2px solid dodgerblue;
 }
 /* Color */
 body {
@@ -102,13 +109,13 @@ body {
 .box {
   background-color: white;
 }
-.section::selection, br::selection, td::selection {
-  background: none;
-  color: none;
-}
 .selected {
   background-color: dodgerblue;
   color: white;
+}
+.section::selection, br::selection, td::selection {
+  background: none;
+  color: none;
 }
 .chord {
   color: blue;
@@ -116,6 +123,7 @@ body {
 .translucent {
   color: rgba(0, 0, 0, 0.5);
 }
+
 /* Font */
 .title {
   font-size: 22px;
@@ -131,7 +139,7 @@ body {
 }
 body {
   font-size: 16px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Noto Sans SC";
 }
 .copyright {
   font-size: 12px;
@@ -139,6 +147,7 @@ body {
 .chord {
   font-weight: bold;
 }
+
 /* Miscellaneous */
 #main-output {
   caret-color: transparent;
@@ -146,9 +155,19 @@ body {
 .box:focus {
   caret-color: black;
 }
-#main-output > div {
-  cursor: default;
-}
 #example {
   display: none;
+}
+#input-title::-webkit-scrollbar, #input-artist::-webkit-scrollbar, #input-key::-webkit-scrollbar { 
+  display: none; 
+}
+#input-title, #input-artist, #input-key {
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+#input-content, #main-output {
+  overflow: auto; 
+}
+#main-output > div {
+  cursor: default;
 }
