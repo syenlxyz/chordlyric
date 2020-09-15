@@ -51,7 +51,7 @@ function enableDropdown() {
   Array.from(document.getElementById("key-options").children).map(function (element) {
     element.addEventListener("click", function (event) {
       // If item clicked option is a non breaking space
-      if (event.target.innerHTML == "nbsp;") {
+      if (event.target.innerHTML == "&nbsp;") {
         document.getElementById("input-key").innerHTML = ""; // Set the input key to empty value
       } else { // Otherwise just copy and paste the clicked value
         document.getElementById("input-key").innerHTML = event.target.innerHTML; 
