@@ -6,6 +6,7 @@
   <script src="script.js"></script>
   <link rel="stylesheet" href="style.css">
   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Noto Sans SC'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 <div id="header"></div>
@@ -14,11 +15,26 @@
     <div id="input-title" class="title box" contenteditable="true"></div>
     <div id="input-subtitle">
       <div id="input-artist" class="artist box" contenteditable="true"></div>
-      <div id="input-right">
-        <div id="key-left" class="key">Key:&nbsp;</div>
-        <div id="key-right" class="key box">
+      <div id="key-left" class="key">Key:&nbsp;</div>
+      <div id="key-right" class="key box">
+        <div id="key-button" class="dropdown button">
+          <div id="input-key" class="dropdown key"></div>
+          <div id="dropdown-arrow" class="fa fa-angle-down dropdown translucent"></div>
+        </div>
+        <div id="key-options" class="options">
           <div>&nbsp;</div>
-          <div id="input-key" contenteditable="true"></div>
+          <div>Ab</div>
+          <div>A</div>
+          <div>Bb</div>
+          <div>B</div>
+          <div>C</div>
+          <div>Db</div>
+          <div>D</div>
+          <div>Eb</div>
+          <div>E</div>
+          <div>F</div>
+          <div>F#</div>
+          <div>G</div>
         </div>
       </div>
     </div>
@@ -43,9 +59,9 @@
 <script>
   // Global variables as item selection placeholders
   var selected, rowIndex, colIndex;
-
   // Load settings
   preloadInput();
+  enableDropdown();
   disableOutputEdit();
   setupOutput();
   enableChordLyric();
