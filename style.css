@@ -10,7 +10,10 @@ html, body {
   width: 40vw;
 }
 #key-right {
-  width: 15%;
+  width: 100px;
+}
+#key-options {
+  width: 98px;
 }
 
 /* Flex*/
@@ -41,17 +44,27 @@ body, #header-left, #header-right {
 #input-content, #output-content {
   flex: 1 1 auto;
 }
+.blank {
+  flex: 1 1 auto;
+}
 
 /* Spacing*/
 html, body {
   margin: 0%;
   padding: 0%;
 }
-#dropdown-arrow {
+.dropdown-arrow {
   margin: 2.5%;
   padding: 2.5%;
   margin-right: 0%;
   padding-right: 0%;
+}
+#input-key, .options > div > div {
+  margin: 4.5%;
+  margin-left: 5%;
+}
+.dropdown-arrow {
+  margin: 7%;
 }
 #main-input, #main-output {
   margin: 1%;
@@ -71,7 +84,7 @@ html, body {
 #input-artist {
   margin-right: 0.5%;
 }
-#input-title, #input-artist, #input-content, #key-left, #key-right {
+#input-title, #input-artist, #input-content, #key-left {
   padding: 1%;
 } 
 #output-title, #output-artist, #output-content, #header-right {
@@ -108,8 +121,12 @@ html, body {
   border: 2px solid dodgerblue;
   outline: 0px solid transparent;
 }
+#key-options {
+  outline: 2px solid dodgerblue;
+  border: 1px solid dodgerblue;
+}
 
-/* Color */
+/* Background */
 body {
   background-color: lightgray;
 }
@@ -118,26 +135,18 @@ body {
 }
 .selected {
   background-color: dodgerblue;
-  color: white;
+}
+#key-options {
+  background-color: white;
 }
 #key-options > div:hover {
   background-color: lightgray;
 }
 .section::selection, br::selection, td::selection {
   background: none;
-  color: none;
 }
-#key-left::selection, #input-key::selection, #key-options > div::selection {
+#key-left::selection, #input-key::selection, #key-options > div > div::selection {
   background: none;
-}
-.chord {
-  color: blue;
-}
-.translucent {
-  color: rgba(0, 0, 0, 0.5);
-}
-.transparent {
-  color: transparent;
 }
 
 /* Font */
@@ -145,7 +154,7 @@ body {
   font-size: 24px;
   font-weight: bolder;
 }
-.artist, .key, #dropdown-arrow {
+.artist, .key, .dropdown-arrow {
   font-size: 20px;
   font-weight: bold;
 }
@@ -162,6 +171,16 @@ body {
 }
 .chord {
   font-weight: bold;
+  color: blue;
+}
+.selected {
+  color: white;
+}
+.translucent {
+  color: rgba(0, 0, 0, 0.5);
+}
+.section::selection, br::selection, td::selection {
+  color: none;
 }
 
 /* Miscellaneous */
@@ -198,4 +217,8 @@ body {
 }
 #key-button, #key-options {
   cursor: pointer;
+}
+#key-options {
+  cursor: pointer;
+  position: absolute;
 }
