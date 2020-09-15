@@ -4,13 +4,13 @@ html, body {
   width: 100vw;
 }
 #input-content, #output-content {
-  height: 20vh;
+  height: 50vh;
 }
 #main-input, #main-output {
   width: 40vw;
 }
 #key-right {
-  width: 8vw;
+  width: 15%;
 }
 
 /* Flex*/
@@ -50,8 +50,8 @@ html, body {
 #dropdown-arrow {
   margin: 2.5%;
   padding: 2.5%;
-  margin-right: 1%;
-  padding-right: 1%;
+  margin-right: 0%;
+  padding-right: 0%;
 }
 #main-input, #main-output {
   margin: 1%;
@@ -135,6 +135,9 @@ body {
 }
 .translucent {
   color: rgba(0, 0, 0, 0.5);
+}
+.transparent {
+  color: transparent;
 }
 
 /* Font */
