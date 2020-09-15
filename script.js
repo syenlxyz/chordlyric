@@ -65,21 +65,6 @@ function disableOutputEdit() {
   document.getElementById("main-output").onkeyup = () => false; // Turn off keydown feature
 }
 
-// Highlight border when moouseover and undo when mouseout
-function enableMouseHover() {
-  // Only applied to the elements with box class
-  for (element of document.getElementsByClassName("box")) {
-    // Highlight the elements when the mouse cursor hovers over
-    element.addEventListener("mouseover", function(event) {
-      this.classList.add("hover"); // Add hover to the class list
-    });
-    // Undo highlight wwhen the mouse cursor moves away
-    element.addEventListener("mouseout", function(event) {
-      this.classList.remove("hover");
-    });
-  }
-}
-
 // Load data into chordlyric editor
 function getOutput(){
   // Load data from input content
