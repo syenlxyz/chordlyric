@@ -10,10 +10,7 @@ html, body {
   width: 40vw;
 }
 #key-right {
-  width: 10vw;
-}
-#input-key {
-  width: 5vw;
+  width: 15%;
 }
 
 /* Flex*/
@@ -27,6 +24,9 @@ body, #header-left, #header-right {
   flex-flow: column;
 }
 #input-content, #output-content {
+  flex-flow: column;
+}
+#key-right, #key-options {
   flex-flow: column;
 }
 #input-content > div {
@@ -47,13 +47,14 @@ html, body {
   margin: 0%;
   padding: 0%;
 }
-#input-right { 
-  margin-left: 0.5%;
-  padding: 0%;
+#dropdown-arrow {
+  margin: 2.5%;
+  padding: 2.5%;
+  margin-right: 0%;
+  padding-right: 0%;
 }
 #main-input, #main-output {
   margin: 1%;
-  margin-bottom: 0%;
 }
 #main-input {
   margin-right: 0.5%;
@@ -78,6 +79,13 @@ html, body {
 }
 #footer, #output-footer {
   padding: 0.5%;
+  padding-top: 0%;
+}
+#key-left {
+  padding-right: 0%;
+}
+#input-key, #key-options > div {
+  padding-left: 1%;
 }
 
 /* Alignment */
@@ -88,20 +96,19 @@ html, body {
 .chord {
   text-align: center;
 }
-#input-right > div {
-  align-items: center;
-}
 
 /* Border */
+#key-left {
+  border: 2px solid lightgray;
+}
 .box {
   border: 2px solid darkgray;
 }
 .box:focus, .box:hover {
   border: 2px solid dodgerblue;
-}
-[contenteditable]:focus {
   outline: 0px solid transparent;
 }
+
 /* Color */
 body {
   background-color: lightgray;
@@ -113,9 +120,15 @@ body {
   background-color: dodgerblue;
   color: white;
 }
+#key-options > div:hover {
+  background-color: lightgray;
+}
 .section::selection, br::selection, td::selection {
   background: none;
   color: none;
+}
+#key-left::selection, #input-key::selection, #key-options > div::selection {
+  background: none;
 }
 .chord {
   color: blue;
@@ -123,13 +136,16 @@ body {
 .translucent {
   color: rgba(0, 0, 0, 0.5);
 }
+.transparent {
+  color: transparent;
+}
 
 /* Font */
 .title {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: bolder;
 }
-.artist, .key {
+.artist, .key, #dropdown-arrow {
   font-size: 20px;
   font-weight: bold;
 }
@@ -149,17 +165,17 @@ body {
 }
 
 /* Miscellaneous */
-#main-output {
-  caret-color: transparent;
-}
-.box:focus {
-  caret-color: black;
-}
 #example {
   display: none;
 }
 #input-title::-webkit-scrollbar, #input-artist::-webkit-scrollbar, #input-key::-webkit-scrollbar { 
   display: none; 
+}
+.options {
+  display: none;
+}
+.show {
+  display: flex;
 }
 #input-title, #input-artist, #input-key {
   overflow-x: scroll;
@@ -168,6 +184,18 @@ body {
 #input-content, #main-output {
   overflow: auto; 
 }
-#main-output > div {
+#header-right{
+  white-space: nowrap;
+}
+#main-output {
+  caret-color: transparent;
+}
+.box:focus {
+  caret-color: black;
+}
+#key-left, #main-output > div {
   cursor: default;
+}
+#key-button, #key-options {
+  cursor: pointer;
 }
