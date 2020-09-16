@@ -10,10 +10,10 @@ html, body {
   width: 40vw;
 }
 #key-right {
-  width: 100px;
+  width: 6vw;
 }
 #key-options {
-  width: 98px;
+  width: 5.98vw;
 }
 
 /* Flex*/
@@ -23,7 +23,7 @@ html, body, div {
 body, #main-input, #main-output {
   flex-flow: column;
 }
-body, #header-left, #header-right {
+#header-left, #header-right {
   flex-flow: column;
 }
 #input-content, #output-content {
@@ -38,10 +38,10 @@ body, #header-left, #header-right {
 #main, #main-input, #main-output {
   flex: 1 1 auto;
 }
-#input-artist, #input-key, #header-left {
+#input-artist, #input-key, #key-button, #input-content {
   flex: 1 1 auto;
 }
-#input-content, #output-content {
+#header-left, #output-content {
   flex: 1 1 auto;
 }
 .blank {
@@ -53,36 +53,35 @@ html, body {
   margin: 0%;
   padding: 0%;
 }
-.dropdown-arrow {
-  margin: 2.5%;
-  padding: 2.5%;
-  margin-right: 0%;
-  padding-right: 0%;
-}
-#input-key, .options > div > div {
-  margin: 4.5%;
-  margin-left: 5%;
-}
-.dropdown-arrow {
-  margin: 7%;
+#input-key, #key-options > div {
+  margin-top: auto;
+  margin-bottom: auto;
+  padding-top: 8%;
+  padding-bottom: 8%;
 }
 #main-input, #main-output {
   margin: 1%;
 }
-#main-input {
-  margin-right: 0.5%;
-}
-#main-output {
-  margin-left: 0.5%;
-}
-#input-title, #input-subtitle {
-  margin-bottom: 0.5%;
+.dropdown-arrow {
+  margin: auto;
 }
 #input-subtitle, #input-content {
   margin-top: 0.5%;
 }
-#input-artist {
+#input-title, #input-subtitle {
+  margin-bottom: 0.5%;
+}
+#main-output {
+  margin-left: 0.5%;
+}
+#input-key, #key-options > div > div {
+  margin-left: 10%;
+}
+#main-input, #input-artist {
   margin-right: 0.5%;
+}
+#key-button > .dropdown-arrow, #key-options > div > .dropdown-arrow {
+  margin-right: 0.5vw;
 }
 #input-title, #input-artist, #input-content, #key-left {
   padding: 1%;
@@ -97,9 +96,6 @@ html, body {
 #key-left {
   padding-right: 0%;
 }
-#input-key, #key-options > div {
-  padding-left: 1%;
-}
 
 /* Alignment */
 #footer, #output-footer {
@@ -111,19 +107,18 @@ html, body {
 }
 
 /* Border */
-#key-left {
-  border: 2px solid lightgray;
+.box:focus, .box:hover {
+  border: 2px solid dodgerblue;
+  outline: transparent;
+}
+#key-options {
+  outline: 2.5px solid dodgerblue;
 }
 .box {
   border: 2px solid darkgray;
 }
-.box:focus, .box:hover {
-  border: 2px solid dodgerblue;
-  outline: 0px solid transparent;
-}
-#key-options {
-  outline: 2px solid dodgerblue;
-  border: 1px solid dodgerblue;
+#key-left {
+  border: 2px solid lightgray;
 }
 
 /* Background */
@@ -187,7 +182,7 @@ body {
 #example {
   display: none;
 }
-#input-title::-webkit-scrollbar, #input-artist::-webkit-scrollbar, #input-key::-webkit-scrollbar { 
+#input-title::-webkit-scrollbar, #input-artist::-webkit-scrollbar { 
   display: none; 
 }
 .options {
@@ -196,12 +191,19 @@ body {
 .show {
   display: flex;
 }
-#input-title, #input-artist, #input-key {
+#input-title, #input-artist {
   overflow-x: scroll;
   white-space: nowrap;
 }
+#key-options {
+  overflow: hidden;
+  position: absolute;
+}
 #input-content, #main-output {
   overflow: auto; 
+}
+#key-right {
+  overflow: hidden;
 }
 #header-right{
   white-space: nowrap;
@@ -217,8 +219,4 @@ body {
 }
 #key-button, #key-options {
   cursor: pointer;
-}
-#key-options {
-  cursor: pointer;
-  position: absolute;
 }
