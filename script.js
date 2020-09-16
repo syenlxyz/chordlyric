@@ -49,10 +49,10 @@ function enableDropdown() {
   });
   // Update input key value when an option is clicked
   Array.from(document.getElementById("key-options").children).map(function (element) {
-    element.addEventListener("click", function (event) {
+    element.addEventListener("click", function(event) {
       // If item clicked option is a non breaking space
-      if (event.target.innerHTML == "&nbsp;") {
-        document.getElementById("input-key").innerHTML = ""; // Set the input key to empty value
+      if (event.target.innerText == "") {
+        document.getElementById("input-key").innerHTML = "&nbsp;"; // Set the input key to empty value
       } else { // Otherwise just copy and paste the clicked value
         document.getElementById("input-key").innerHTML = event.target.innerText; 
       }
@@ -84,7 +84,7 @@ function setupOutput() {
     element.addEventListener("click", // Send the value of input key to the output
     function getKey() {
       // Display nothing if there is no key input
-      if (document.getElementById("input-key").innerText == "&nbsp;") {
+      if (document.getElementById("input-key").innerHTML == "&nbsp;") {
         document.getElementById("output-key").innerHTML = "";
       // Otherwise display the key information to the output
       } else { 
