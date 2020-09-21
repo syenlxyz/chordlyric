@@ -52,7 +52,7 @@ function enableDropdown() {
     element.addEventListener("click", function(event) {
       // If item clicked option is a non breaking space
       if (event.target.innerText == "") {
-        document.getElementById("input-key").innerHTML = "&nbsp;"; // Set the input key to empty value
+        document.getElementById("input-key").innerHTML = "\u00A0"; // Set the input key to empty value
       } else { // Otherwise just copy and paste the clicked value
         document.getElementById("input-key").innerHTML = event.target.innerText; 
       }
@@ -72,23 +72,23 @@ function disableOutputEdit() {
 // Setup data processing from input to output
 function setupOutput() {
   // Copy song title from input to output on keyup
-  document.getElementById("input-title").addEventListener("keyup", function (event) {
-    document.getElementById("output-title").innerHTML = document.getElementById("input-title").innerHTML;
+  document.getElementById("input-title").addEventListener("keyup", function(event) {
+    document.getElementById("output-title").innerHTML = document.getElementById("input-title").innerHTML.split(" ").join("\u00A0");
   });
   // Copy artist name from input to output on keyup
-  document.getElementById("input-artist").addEventListener("keyup", function (event) {
-    document.getElementById("output-artist").innerHTML = document.getElementById("input-artist").innerHTML;
+  document.getElementById("input-artist").addEventListener("keyup", function(event) {
+    document.getElementById("output-artist").innerHTML = document.getElementById("input-artist").innerHTML.split(" ").join("\u00A0");
   });
   // Copy key value from input to output upon dropdown item select
-  Array.from(document.getElementById("key-options").children).map(function (element) {
+  Array.from(document.getElementById("key-options").children).map(function(element) {
     element.addEventListener("click", // Send the value of input key to the output
     function getKey() {
       // Display nothing if there is no key input
-      if (document.getElementById("input-key").innerHTML == "&nbsp;") {
+      if (document.getElementById("input-key").innerHTML == "\u00A0") {
         document.getElementById("output-key").innerHTML = "";
       // Otherwise display the key information to the output
       } else { 
-        document.getElementById("output-key").innerHTML = "Key: " + document.getElementById("input-key").innerText;
+        document.getElementById("output-key").innerHTML = "Key:\u00A0" + document.getElementById("input-key").innerText;
       }
     });
   });
@@ -108,7 +108,7 @@ function getOutput(){
     var element = document.createElement("div"); // Create an empty div element
     element.setAttribute("class", property); // Set class to its corresponding property
     if (property == "section") { // If the object is a section
-      var content = document.createTextNode(line["section"]); // Create a text node for section
+      var content = document.createTextNode(line["section"].replace(" ", "\u00A0")); // Create a text node for section
     } else if (property == "break") { // If the object is a line break
       var content = document.createElement("br"); // Create a br element
     } else if (property == "line") { // If the object is a line with chord and lyric
@@ -164,13 +164,38 @@ function getContent(object) {
     // Create a column for each value of the corresponding object property
     for (var item of object["line"][property]){
       var col = document.createElement("td"); // Create a placeholder for table columns in the row
-      col.innerHTML = item.replace(" ", "&nbsp;"); // Replace single whitespace with HTML non breaking space
+      col.innerHTML = item.replace(" ", "\u00A0"); // Replace single whitespace with HTML non breaking space
       row.appendChild(col); // Append columns to the current row
     }
     table.appendChild(row); // Append rows to the table placeholder 
   }
   // Return the chordlyric table back to where it is called
   return table; 
+}
+
+// Enable output printer to PDF
+function enableOutputPrint() {
+  // Add an event listener on keydon
+  document.addEventListener("keydown", function(event) {
+    if (event.ctrlKey) { // If Ctrl key is pressed
+      if (event.key == "p") { // If "p" is pressed after pressing Ctrl
+        event.preventDefault(); // Prevent the default print function
+        // Set output content to the hidden output pdf element
+        document.getElementById("output-pdf").innerHTML = document.getElementById("main-output").innerHTML; 
+        document.getElementById("output-pdf").classList.toggle("hide"); // Unhide the output pdf element
+        // Set up options for html2pdf
+        var opt = {
+          margin: 0,
+          filename: document.getElementById("input-title").innerText + ".pdf",
+          image: {type: "svg", quality: 1},
+          html2canvas: {scale: 2},
+          jsPDF: {unit: "in", format: "a4", orientation: "portrait"}
+        };
+        html2pdf(document.getElementById("output-pdf"), opt); // Export output pdf content to pdf file
+        document.getElementById("output-pdf").classList.toggle("hide"); // Hide the output pdf element again
+      }
+    }
+  });
 }
 
 // Turn on chord lyric mode
@@ -242,10 +267,10 @@ function keypressInput(event){
     for (element of document.getElementsByClassName("selected")) { // Only the elements with selected class will be edited
       if (event.key.length == 1) { // If the input only has one character (to avoid unwanted keypress input)
         element.innerHTML += event.key // Add one character to the end of the string
-                                  .split(" ").join("&nbsp;"); // Replace whitespace with HTML nonbreaking space
+                                  .split(" ").join("\u00A0"); // Replace whitespace with HTML nonbreaking space
       } else if (event.key == "Backspace") { // If Backspace key is pressed
-        var str = element.innerHTML.split("&nbsp;").join(" "); // Convert HTML nonbreaking space back into normal whitespace
-        element.innerHTML = str.slice(0, str.length - 1).split(" ").join("&nbsp;"); // Remove the last character of the string
+        var str = element.innerHTML.split("\u00A0").join(" "); // Convert HTML nonbreaking space back into normal whitespace
+        element.innerHTML = str.slice(0, str.length - 1).split(" ").join("\u00A0"); // Remove the last character of the string
       } else if (event.key == "Delete") { // If Delete key is pressed
         element.innerHTML = ""; // Remove everything in the string
       }
