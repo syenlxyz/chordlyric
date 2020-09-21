@@ -4,6 +4,7 @@
   <title>ChordLyric Editor</title>
   <meta charset="UTF-8">
   <script src="script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.8.1/html2pdf.bundle.min.js"></script>
   <link rel="stylesheet" href="style.css">
   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Noto Sans SC'>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -59,6 +60,7 @@
 </div>
 <div id="footer" class="copyright">Copyright © 2020 ChordLyric Editor by SyenLxyz. All Rights Reserved.</div>
 <div id="example"><div>[Verse 1]</div><div>有时享平安如</div><div>江河水平又稳</div><div>有时遇忧伤来似浪滚</div><div><br></div><div>不论何种环境</div><div>主已教导我说</div><div>我心灵得安宁 得安宁</div><div><br></div><div>[Chorus]</div><div>当寒冬的风暴起</div><div>当世上的思虑袭</div><div>我心灵得安宁 得安宁</div><div><br></div><div>在正午焦阳下</div><div>主的恩典够我用</div><div>我心灵得安宁 得安宁</div><div><br></div><div>[Verse 2]</div><div>当撒旦试探我</div><div>众试炼也来临</div><div>靠这有福确据来得胜</div><div><br></div><div>因主知我的软弱</div><div>祂知我的惧怕</div><div>甘为我流宝血救赎我</div></div>
+<div id="output-pdf" class="hide"></div>
 <script>
   // Global variables as item selection placeholders
   var selected, rowIndex, colIndex;
@@ -67,6 +69,7 @@
   enableDropdown();
   disableOutputEdit();
   setupOutput();
+  enableOutputPrint();
   enableChordLyric();
   disableChordLyric();
 </script>
