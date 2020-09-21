@@ -3,6 +3,10 @@ html, body {
   height: 100vh;
   width: 100vw;
 }
+#output-pdf {
+  height: 11.75in;
+  width: 8.25in;
+}
 #input-content, #output-content {
   height: 50vh;
 }
@@ -21,6 +25,9 @@ html, body, div {
   display: flex;
 }
 body, #main-input, #main-output {
+  flex-flow: column;
+}
+#output-pdf {
   flex-flow: column;
 }
 #header-left, #header-right {
@@ -186,6 +193,9 @@ body {
   display: none; 
 }
 .options {
+  display: none;
+}
+.hide {
   display: none;
 }
 .show {
