@@ -12,19 +12,11 @@
   box-sizing: border-box;
 }
 body {
-  display: flex;
-  flex-flow: column;
   height: 100vh;
   width: 100vw;
   padding: 0;
   margin: 0;
   font-family: 'Roboto';
-}
-div {
-  display: flex;
-}
-*::selection {
-  background-color: transparent;
 }
 .header {
   height: 5%;
@@ -47,7 +39,7 @@ div {
 }
 .navbar-item {
   cursor: pointer;
-  padding: 4px 8px;
+  padding: 6px 8px;
 }
 .navbar-item:hover {
   background-color: #000000;
@@ -59,23 +51,21 @@ div {
   height: 92%;
 }
 .sidebar {
-  width: 150px;
-  flex-flow: column;
+  width: 200px;
   background-color: #F1F1F1;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.2), 0 5px 10px 0 rgba(0, 0, 0, 0.1);
   z-index: 1;
   overflow-y: scroll;
 }
 .sidebar-item {
-  flex-flow: column;
   cursor: pointer;
   padding: 10px 15px;
 }
 .sidebar-item:hover {
   background-color: #CCCCCC;
 } 
-.sidebar-item:hover {
-  background-color: #CCCCCC;
+.sidebar-item:active {
+  background-color: #EEEEEE;
 }
 .song-title {
   font-size: 14px;
@@ -85,11 +75,9 @@ div {
   color: #6D6D6D;
 } 
 .main {
-  flex-grow: 1;
   background-color: #E6E6E6;
 }
 .window {
-  flex-grow: 1;
   background-color: #FFFFFF;
   border: 1px solid #C6C6C6;
   margin: 10px;
@@ -102,52 +90,44 @@ div {
   width: 50%;
   margin-left: 5px;
 }
+.flexbox {
+  display: flex;
+}
+.flexbox-grow {
+  flex-grow: 1;
+}
+.flexbox-column {
+  flex-direction: column;
+}
 .hide {
   display: none;
 }
+.noselect::selection {
+  background-color: transparent;
+}
 </style>
 </head>
-<body>
-<div class="header"><span>Chord</span>Lyric</div>
-<div class="navbar">
-  <div class="navbar-item"><i class="fa fa-bars"></i></div>
-  <div class="navbar-item">File</div>
-  <div class="navbar-item">Edit</div>
-  <div class="navbar-item">View</div>
-  <div class="navbar-item">Window</div>
-  <div class="navbar-item">Help</div>
+<body class="flexbox flexbox-column">
+<div class="header noselect"><span class="noselect">Chord</span>Lyric</div>
+<div class="navbar flexbox">
+  <div class="navbar-item noselect"><i class="fa fa-bars"></i></div>
+  <div class="navbar-item noselect">File</div>
+  <div class="navbar-item noselect">Edit</div>
+  <div class="navbar-item noselect">View</div>
+  <div class="navbar-item noselect">Window</div>
+  <div class="navbar-item noselect">Help</div>
 </div>
-<div class="content">
-  <div class="sidebar">
-    <div class="sidebar-item"><div class="song-title">Song #1</div><div class="song-artist">Artist #1</div></div>
-    <div class="sidebar-item"><div class="song-title">Song #2</div><div class="song-artist">Artist #2</div></div>
-    <div class="sidebar-item"><div class="song-title">Song #3</div><div class="song-artist">Artist #3</div></div>
-    <div class="sidebar-item"><div class="song-title">Song #5</div><div class="song-artist">Artist #5</div></div>
-    <div class="sidebar-item"><div class="song-title">Song #6</div><div class="song-artist">Artist #6</div></div>
-    <div class="sidebar-item"><div class="song-title">Song #7</div><div class="song-artist">Artist #7</div></div>
-    <div class="sidebar-item"><div class="song-title">Song #8</div><div class="song-artist">Artist #8</div></div>
-    <div class="sidebar-item"><div class="song-title">Song #9</div><div class="song-artist">Artist #9</div></div>
-    <div class="sidebar-item"><div class="song-title">Song #10</div><div class="song-artist">Artist #10</div></div>
-    <div class="sidebar-item"><div class="song-title">Song #11</div><div class="song-artist">Artist #11</div></div>
-    <div class="sidebar-item"><div class="song-title">Song #12</div><div class="song-artist">Artist #12</div></div>
-    <div class="sidebar-item"><div class="song-title">Song #13</div><div class="song-artist">Artist #13</div></div>
-    <div class="sidebar-item"><div class="song-title">Song #14</div><div class="song-artist">Artist #14</div></div>
-    <div class="sidebar-item"><div class="song-title">Song #15</div><div class="song-artist">Artist #15</div></div>
-    <div class="sidebar-item"><div class="song-title">Song #16</div><div class="song-artist">Artist #16</div></div>
-    <div class="sidebar-item"><div class="song-title">Song #17</div><div class="song-artist">Artist #17</div></div>
-    <div class="sidebar-item"><div class="song-title">Song #18</div><div class="song-artist">Artist #18</div></div>
-    <div class="sidebar-item"><div class="song-title">Song #19</div><div class="song-artist">Artist #19</div></div>
-    <div class="sidebar-item"><div class="song-title">Song #20</div><div class="song-artist">Artist #20</div></div>
-    <div class="sidebar-item"><div class="song-title">Song #21</div><div class="song-artist">Artist #21</div></div>
-    <div class="sidebar-item"><div class="song-title">Song #22</div><div class="song-artist">Artist #22</div></div>
-    <div class="sidebar-item"><div class="song-title">Song #23</div><div class="song-artist">Artist #23</div></div>
-    <div class="sidebar-item"><div class="song-title">Song #24</div><div class="song-artist">Artist #24</div></div>
-    <div class="sidebar-item"><div class="song-title">Song #25</div><div class="song-artist">Artist #25</div></div>
-  </div>
-  <div class="main">
-    <div class="window left">
+<div class="content flexbox">
+  <div class="sidebar flexbox flexbox-column hide">
+    <div class="sidebar-item flexbox flexbox-column">
+      <div class="song-title noselect">Song Name</div>
+      <div class="song-artist noselect">Artist Name</div>
     </div>
-    <div class="window right">
+  </div>
+  <div class="main flexbox flexbox-grow">
+    <div class="window left flexbox-grow">
+    </div>
+    <div class="window right flexbox-grow">
     </div>
   </div>
 </div>
