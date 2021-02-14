@@ -1,0 +1,160 @@
+/* Dimension */
+* {
+  box-sizing: border-box;
+}
+body {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden
+}
+.content {
+  height: 80vh;
+}
+.sidebar {
+  width: 200px;
+  overflow-y: scroll;
+} 
+.window {
+  width: 50%;
+}
+.dragbar {
+  width: 1px;
+  position: relative;
+}
+.dragbar-resize {
+  height: 100%; 
+  position: absolute;
+  left: -8px;
+  right: -8px;
+}
+
+/* Spacing */
+body {
+  padding: 0;
+  margin: 0;
+}
+.header {
+  padding: 4px 8px 2px;
+}
+.menubar-item {
+  padding: 6px 8px 4px;
+}
+.navbar-item {
+  padding: 8px 16px 6px;
+}
+.toolbar-item {
+  padding: 8px 10px;
+}
+.sidebar-item {
+  padding: 10px 15px;
+}
+.song-artist {
+  padding-top: 4px;
+} 
+
+/* Font */
+body {
+  font-family: 'Roboto';
+}
+.header {
+  font-family: 'Ubuntu';
+  font-size: 35px;
+  font-weight: bold;
+}
+.menubar {
+  font-size: 15px;
+}
+.navbar {
+  font-size: 16px; 
+}
+.song-title {
+  font-size: 14px;
+} 
+.song-artist {
+  font-size: 12px;
+} 
+
+/* Color */
+.header > span {
+  color: #0049b7;
+}
+.menubar {
+  background-color: #5F5F5F;
+  color: #FFFFFF;
+}
+.menubar-item:hover {
+  background-color: #000000;
+}
+.menubar-item:active {
+  background-color: #5F5F5F;
+}
+.navbar {
+  background-color: #EAEAEA;
+  border-bottom: 1px solid #CBCBCB;
+}
+.navbar-item {
+  border-right: 1px solid #CBCBCB;
+}
+.navbar-item:hover {
+  background-color: #FAFAFA;
+}
+.navbar-item:active {
+  background-color: #EAEAEA;
+}
+.toolbar {
+  background-color: #FBFBFB;
+  border-bottom: 1px solid #CBCBCB;
+}
+.toolbar-item:hover {
+  color: #1E90FF;
+}
+.toolbar-item:active {
+  color: #000000;
+}
+.sidebar {
+  background-color: #FBFBFB;
+} 
+.sidebar-item:hover {
+  background-color: #E1E1E1;
+} 
+.sidebar-item:active {
+  background-color: #FBFBFB;
+}
+.song-artist {
+  color: #6D6D6D;
+} 
+.dragbar {
+  background-color: #CBCBCB;
+}
+.dragbar:hover {
+  background-color: #1E90FF;
+}
+.dragbar:active {
+  background-color: #CBCBCB;
+}
+
+/* Class */
+.hide {
+  display: none;
+}
+.flexbox {
+  display: flex;
+}
+.cursor-default {
+  cursor: default;
+}
+.dragbar-resize {
+  cursor: col-resize;
+}
+.flexbox-grow {
+  flex-grow: 1;
+}
+.flexbox-column {
+  flex-direction: column;
+}
+.active {
+  background-color: #FAFAFA;
+}
+.noselect::selection {
+  background-color: transparent;
+}
