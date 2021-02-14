@@ -4,132 +4,202 @@
 <title>ChordLyric</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Consolas">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-* {
-  box-sizing: border-box;
+.document-title {
+  white-space: nowrap;
 }
-body {
-  height: 100vh;
-  width: 100vw;
-  padding: 0;
-  margin: 0;
-  font-family: 'Roboto';
+.chordpro {
+  outline: none;
+  font-family: 'Consolas';
 }
-.header {
-  height: 5%;
-  font-family: 'Ubuntu';
-  font-size: 35px;
-  font-weight: bold;
-  cursor: default;
-  padding: 4px 8px 2px;
-}
-.header > span {
-  color: #0049b7;
-}
-.navbar {
-  height: 3%;
-  background-color: #5F5F5F;
-  font-size: 15px;
-  color: #FFFFFF;
-  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.2), 0 5px 10px 0 rgba(0, 0, 0, 0.1);
-  z-index: 2;
-}
-.navbar-item {
-  cursor: pointer;
-  padding: 6px 8px;
-}
-.navbar-item:hover {
-  background-color: #000000;
-}
-.navbar-item:active {
-  background-color: #515151;
-}
-.content {
-  height: 92%;
-}
-.sidebar {
-  width: 200px;
-  background-color: #F1F1F1;
-  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.2), 0 5px 10px 0 rgba(0, 0, 0, 0.1);
-  z-index: 1;
-  overflow-y: scroll;
-}
-.sidebar-item {
-  cursor: pointer;
-  padding: 10px 15px;
-}
-.sidebar-item:hover {
-  background-color: #CCCCCC;
-} 
-.sidebar-item:active {
-  background-color: #EEEEEE;
-}
-.song-title {
-  font-size: 14px;
-} 
-.song-artist {
-  font-size: 12px;
-  color: #6D6D6D;
-} 
-.main {
-  background-color: #E6E6E6;
-}
-.window {
-  background-color: #FFFFFF;
-  border: 1px solid #C6C6C6;
-  margin: 10px;
-}
-.left {
-  width: 50%;
-  margin-right: 5px;
-}
-.right {
-  width: 50%;
-  margin-left: 5px;
-}
-.flexbox {
-  display: flex;
-}
-.flexbox-grow {
-  flex-grow: 1;
-}
-.flexbox-column {
-  flex-direction: column;
-}
-.hide {
-  display: none;
-}
-.noselect::selection {
-  background-color: transparent;
+.editor {
+  padding: 20px;
 }
 </style>
 </head>
 <body class="flexbox flexbox-column">
-<div class="header noselect"><span class="noselect">Chord</span>Lyric</div>
-<div class="navbar flexbox">
-  <div class="navbar-item noselect"><i class="fa fa-bars"></i></div>
-  <div class="navbar-item noselect">File</div>
-  <div class="navbar-item noselect">Edit</div>
-  <div class="navbar-item noselect">View</div>
-  <div class="navbar-item noselect">Window</div>
-  <div class="navbar-item noselect">Help</div>
+<div class="header noselect cursor-default"><span class="noselect">Chord</span>Lyric</div>
+<div class="menubar flexbox cursor-default">
+  <div class="menubar-item noselect">File</div>
+  <div class="menubar-item noselect">Edit</div>
+  <div class="menubar-item noselect">View</div>
+  <div class="menubar-item noselect">Window</div>
+  <div class="menubar-item noselect">Help</div>
 </div>
-<div class="content flexbox">
-  <div class="sidebar flexbox flexbox-column hide">
-    <div class="sidebar-item flexbox flexbox-column">
-      <div class="song-title noselect">Song Name</div>
-      <div class="song-artist noselect">Artist Name</div>
+<div class="navbar flexbox cursor-default">
+  <div class="navbar-item">
+    <div class="document-title noselect">Song #1</div>
+  </div>
+  <div class="navbar-item active">
+    <div class="document-title noselect">Song #2</div>
+  </div>
+  <div class="navbar-item">
+    <div class="document-title noselect">Song #3</div>
+  </div>
+  <div class="navbar-item">
+    <div class="document-title noselect">Song #4</div>
+  </div>
+  <div class="navbar-item">
+    <div class="document-title noselect">Song #5</div>
+  </div>
+  <div class="navbar-item">
+    <div class="document-title noselect">Song #6</div>
+  </div>
+  <div class="navbar-item">
+    <div class="document-title noselect">Song #7</div>
+  </div>
+  <div class="navbar-item">
+    <div class="document-title noselect">Song #8</div>
+  </div>
+  <div class="navbar-item">
+    <div class="document-title noselect">Song #9</div>
+  </div>
+  <div class="navbar-item">
+    <div class="document-title noselect">Song #10</div>
+  </div>
+  <div class="navbar-item">
+    <div class="document-title noselect">Song #11</div>
+  </div>
+  <div class="navbar-item">
+    <div class="document-title noselect">Song #12</div>
+  </div>
+  <div class="navbar-item">
+    <div class="document-title noselect">Song #13</div>
+  </div>
+  <div class="navbar-item">
+    <div class="document-title noselect">Song #14</div>
+  </div>
+  <div class="navbar-item">
+    <div class="document-title noselect">Song #15</div>
+  </div>
+  <div class="navbar-item">
+    <div class="document-title noselect">Song #16</div>
+  </div>
+  <div class="navbar-item">
+    <div class="document-title noselect">Song #17</div>
+  </div>
+  <div class="navbar-item">
+    <div class="document-title noselect">Song #18</div>
+  </div>
+  <div class="navbar-item">
+    <div class="document-title noselect">Song #19</div>
+  </div>
+  <div class="navbar-item">
+    <div class="document-title noselect">Song #20</div>
+  </div>
+</div>
+<div class="toolbar flexbox cursor-default">
+  <div class="toolbar-item noselect">Tool A</div>
+  <div class="toolbar-item noselect">Tool B</div>
+  <div class="toolbar-item noselect">Tool C</div>
+  <div class="toolbar-item noselect">Tool D</div>
+  <div class="toolbar-item noselect">Tool E</div>
+  <div class="toolbar-item noselect">Tool F</div>
+  <div class="toolbar-item noselect">Tool G</div>
+</div>
+<div class="content flexbox flexbox-grow">
+  <div class="sidebar cursor-default">
+    <div class="sidebar-item">
+      <div class="song-title noselect">Song #1</div>
+      <div class="song-artist noselect">Artist #1</div>
+    </div>
+    <div class="sidebar-item">
+      <div class="song-title noselect">Song #2</div>
+      <div class="song-artist noselect">Artist #2</div>
+    </div>
+    <div class="sidebar-item">
+      <div class="song-title noselect">Song #3</div>
+      <div class="song-artist noselect">Artist #3</div>
+    </div>
+    <div class="sidebar-item">
+      <div class="song-title noselect">Song #4</div>
+      <div class="song-artist noselect">Artist #4</div>
+    </div>
+    <div class="sidebar-item">
+      <div class="song-title noselect">Song #5</div>
+      <div class="song-artist noselect">Artist #5</div>
+    </div>
+    <div class="sidebar-item">
+      <div class="song-title noselect">Song #6</div>
+      <div class="song-artist noselect">Artist #6</div>
+    </div>
+    <div class="sidebar-item">
+      <div class="song-title noselect">Song #7</div>
+      <div class="song-artist noselect">Artist #7</div>
+    </div>
+    <div class="sidebar-item">
+      <div class="song-title noselect">Song #8</div>
+      <div class="song-artist noselect">Artist #8</div>
+    </div>
+    <div class="sidebar-item">
+      <div class="song-title noselect">Song #9</div>
+      <div class="song-artist noselect">Artist #9</div>
+    </div>
+    <div class="sidebar-item">
+      <div class="song-title noselect">Song #10</div>
+      <div class="song-artist noselect">Artist #10</div>
+    </div>
+    <div class="sidebar-item">
+      <div class="song-title noselect">Song #11</div>
+      <div class="song-artist noselect">Artist #11</div>
+    </div>
+    <div class="sidebar-item">
+      <div class="song-title noselect">Song #12</div>
+      <div class="song-artist noselect">Artist #12</div>
+    </div>
+    <div class="sidebar-item">
+      <div class="song-title noselect">Song #13</div>
+      <div class="song-artist noselect">Artist #13</div>
+    </div>
+    <div class="sidebar-item">
+      <div class="song-title noselect">Song #14</div>
+      <div class="song-artist noselect">Artist #14</div>
+    </div>
+    <div class="sidebar-item">
+      <div class="song-title noselect">Song #15</div>
+      <div class="song-artist noselect">Artist #15</div>
+    </div>
+    <div class="sidebar-item">
+      <div class="song-title noselect">Song #16</div>
+      <div class="song-artist noselect">Artist #16</div>
+    </div>
+    <div class="sidebar-item">
+      <div class="song-title noselect">Song #17</div>
+      <div class="song-artist noselect">Artist #17</div>
+    </div>
+    <div class="sidebar-item">
+      <div class="song-title noselect">Song #18</div>
+      <div class="song-artist noselect">Artist #18</div>
+    </div>
+    <div class="sidebar-item">
+      <div class="song-title noselect">Song #19</div>
+      <div class="song-artist noselect">Artist #19</div>
+    </div>
+    <div class="sidebar-item">
+      <div class="song-title noselect">Song #20</div>
+      <div class="song-artist noselect">Artist #20</div>
     </div>
   </div>
+  <div class="dragbar"><div class="dragbar-resize"></div></div>
   <div class="main flexbox flexbox-grow">
-    <div class="window left flexbox-grow">
+    <div class="window  flexbox-column flexbox-grow">
+      <div id= "chordpro" class="chordpro editor flexbox flexbox-column flexbox-grow" contenteditable="true"></div>
     </div>
-    <div class="window right flexbox-grow">
+    <div class="dragbar"><div class="dragbar-resize"></div></div>
+    <div class="window flexbox flexbox-column flexbox-grow">
+      <div id= "chordlyric" class="chordlyric editor flexbox flexbox-column flexbox-grow"></div>
     </div>
   </div>
 </div>
+<script>
+document.getElementById('chordpro').addEventListener('keyup', function(event) {
+  document.getElementById('chordlyric').innerText = document.getElementById('chordpro').innerText;
+});
+</script>
 </body>
 </html>
