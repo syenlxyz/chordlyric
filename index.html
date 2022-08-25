@@ -1,32 +1,32 @@
 <!DOCTYPE html>
-<html class="h-100">
+<html>
 <head>
   <title>ChordLyric</title>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="h-100 d-flex flex-column">
+<body class="container-fluid">
 
-  <div class="container-fluid">
+  <div class="header py-2">
     <h1>ChordLyric</h1>
   </div>
 
-  <div class="container-fluid d-flex flex-fill">
-    <div class="content flex-fill">
-      <textarea id="input" class="content-window border"></textarea>
+  <div class="content">
+    <div class="content-window border">
+      <textarea id="input" class="window"></textarea>
     </div>
-    <div class="content flex-fill">
-      <iframe id="output" class="content-window border"></iframe>
+    <div class="content-window border">
+      <iframe id="output" class="window"></iframe>
     </div>
   </div>
 
+  <div class="footer py-2">
+    <button class="btn btn-primary" onclick="runCode()">Run Code</button>
+  </div>
+
   <script src="script.js"></script>
-  
 </body>
 </html>
