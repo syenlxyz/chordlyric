@@ -1,16 +1,16 @@
 # chordlyric
 
 ## Directives
-1. new_song
-2. new_page
-3. column_break
-4. title
+1. new_song (ip)
+2. new_page (ip)
+3. column_break (ip)
+4. title 
 5. artist
 6. key
 7. section
-8. tranpose
+8. tranpose (ip)
 
-## Formatting
+## Formatting (ip)
 1. title-font
 2. title-size
 3. title-color
