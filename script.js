@@ -38,7 +38,7 @@ function ProToData(input, data) {
       line = line.trim();
       if (!line) {
         let content = data['content'];
-        content.push('');
+        content.push('\n');
       } else {
         //
         let chord = [];
@@ -79,8 +79,38 @@ function ProToData(input, data) {
 
 //
 function DataToLyric(output, data) {
+  //
   let head = output.contentDocument.head;
   let body = output.contentDocument.body;
+
+  //
+  let metadata = data['metadata'];
+  let h2 = document.createElement('h2');
+  h2.innerText = metadata['title'];
+  body.appendChild(h2);
+
+  //
+  let p = document.createElement('p');
+  p.innerText = metadata['artist'] + ' | Key:' + metadata['key'];
+  body.appendChild(p);
+
+  // 
+  let content = data['content'];
+  content.map(function(item) {
+    if (item) {
+      let keys = Object.keys(item);
+      if (keys.includes('section')) {
+        let h4 = document.createElement('h4');
+        h4.innerText = item['section'];
+        body.appendChild(h4);
+      } else {
+        let table = document.createElement('table');
+      }
+    } else {
+      let br = document.createElement('br');
+      body.appendChild(br);
+    }
+  });
 }
 
 //
