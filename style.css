@@ -1,7 +1,7 @@
 html, body {
+  height: 100%;
   display: flex;
   flex-direction: column;
-  height: 100%;
 }
 
 .content {
@@ -9,20 +9,29 @@ html, body {
   flex-grow: 1;
 }
 
-.content-window {
+.main {
   display: flex;
-  width: 50%;
+  flex-grow: 1;
 }
 
 .window {
-  width: 100%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.window-content {
+  display: flex;
+  flex-grow: 1;
+}
+
+.window-pane {
+  flex-grow: 1;
 }
 
 textarea {
   resize: none;
   border: none;
-}
-
-textarea:focus {
   outline: none;
 }
